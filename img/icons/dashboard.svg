@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Member dashboard">
+  <rect x="6" y="10" width="52" height="44" rx="5" fill="#1b3a5c"/>
+  <circle cx="24" cy="27" r="7.5" fill="#c9932f"/>
+  <path d="M13 45c1.6-6.4 6-9.6 11-9.6S33.4 38.6 35 45z" fill="#fff" opacity=".9"/>
+  <rect x="40" y="22" width="12" height="3" rx="1.5" fill="#fff" opacity=".85"/>
+  <rect x="40" y="30" width="12" height="3" rx="1.5" fill="#fff" opacity=".55"/>
+  <rect x="40" y="38" width="8" height="3" rx="1.5" fill="#c9932f"/>
+</svg>
