@@ -1,0 +1,72 @@
+[
+  {
+    "memberId": "2415001642",
+    "name": "Suryansh Saxena",
+    "email": "suryansh@gla.ac.in",
+    "password": "library@642",
+    "course": "B.Tech CSE",
+    "year": "3rd Year",
+    "membership": "Student",
+    "joined": "2024-08-01",
+    "bookLimit": 5,
+    "initials": "SS",
+    "status": "active",
+    "savedResources": ["DR001", "DR002", "DR004"]
+  },
+  {
+    "memberId": "2415001659",
+    "name": "Tanishq Rastogi",
+    "email": "tanishq@gla.ac.in",
+    "password": "library@659",
+    "course": "B.Tech CSE",
+    "year": "3rd Year",
+    "membership": "Student",
+    "joined": "2024-08-01",
+    "bookLimit": 5,
+    "initials": "TR",
+    "status": "active",
+    "savedResources": ["DR008", "DR012"]
+  },
+  {
+    "memberId": "2415001654",
+    "name": "Tanishka Chaudhary",
+    "email": "tanishka@gla.ac.in",
+    "password": "library@654",
+    "course": "B.Tech CSE",
+    "year": "3rd Year",
+    "membership": "Student",
+    "joined": "2024-08-01",
+    "bookLimit": 5,
+    "initials": "TC",
+    "status": "active",
+    "savedResources": ["DR002", "DR007"]
+  },
+  {
+    "memberId": "2415001590",
+    "name": "Sonu Raj",
+    "email": "sonu@gla.ac.in",
+    "password": "library@590",
+    "course": "B.Tech CSE",
+    "year": "3rd Year",
+    "membership": "Student",
+    "joined": "2024-08-01",
+    "bookLimit": 5,
+    "initials": "SR",
+    "status": "active",
+    "savedResources": ["DR005"]
+  },
+  {
+    "memberId": "FAC000118",
+    "name": "Dr. R. K. Agarwal",
+    "email": "rk.agarwal@gla.ac.in",
+    "password": "faculty@118",
+    "course": "Department of CEA",
+    "year": "Faculty",
+    "membership": "Faculty",
+    "joined": "2019-07-15",
+    "bookLimit": 10,
+    "initials": "RA",
+    "status": "active",
+    "savedResources": ["DR003", "DR006"]
+  }
+]

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign up | GLA Central Library</title>
+<link rel="icon" href="img/logo.svg">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="auth-wrap">
+
+  <div class="auth-side">
+    <a href="index.html" class="d-flex align-items-center gap-2 text-white text-decoration-none mb-5">
+      <img src="img/logo.svg" alt="" width="40" height="40">
+      <span class="d-flex flex-column lh-1">
+        <span class="fw-bold fs-5">GLA Central Library</span>
+        <span class="brand-sub">Digital Resource Management</span>
+      </span>
+    </a>
+    <img src="img/auth-art.svg" alt="Library membership card illustration" class="img-fluid mb-4" style="max-width:340px">
+    <h2 class="h3">Join the library in a minute.</h2>
+    <ul class="list-unstyled text-light opacity-75 mb-0 d-grid gap-2">
+      <li><i class="bi bi-check-circle-fill text-warning me-2"></i>Issue up to 5 books at a time</li>
+      <li><i class="bi bi-check-circle-fill text-warning me-2"></i>Save digital resources to your account</li>
+      <li><i class="bi bi-check-circle-fill text-warning me-2"></i>Get due date and fine reminders</li>
+    </ul>
+  </div>
+
+  <div class="auth-form-col">
+    <div class="auth-card">
+      <a href="index.html" class="d-lg-none d-flex align-items-center gap-2 text-decoration-none mb-4">
+        <img src="img/logo.svg" alt="" width="34" height="34">
+        <span class="fw-bold">GLA Central Library</span>
+      </a>
+
+      <h1 class="h3 mb-1">Create your account</h1>
+      <p class="text-muted-soft mb-4">Register with your university email to become a library member.</p>
+
+      <div id="signupAlert"></div>
+
+      <form id="signupForm" novalidate>
+        <div class="mb-3">
+          <label for="fullName" class="form-label fw-semibold small">Full name</label>
+          <input type="text" class="form-control" id="fullName" placeholder="e.g. Suryansh Saxena" required>
+          <div class="invalid-feedback d-block small" id="fullNameErr"></div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-sm-6 mb-3">
+            <label for="rollNo" class="form-label fw-semibold small">University roll number</label>
+            <input type="text" class="form-control" id="rollNo" placeholder="10 digits" maxlength="10" required>
+            <div class="invalid-feedback d-block small" id="rollNoErr"></div>
+          </div>
+          <div class="col-sm-6 mb-3">
+            <label for="year" class="form-label fw-semibold small">Year</label>
+            <select class="form-select" id="year">
+              <option>1st Year</option>
+              <option>2nd Year</option>
+              <option selected>3rd Year</option>
+              <option>4th Year</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label fw-semibold small">University email</label>
+          <input type="email" class="form-control" id="email" placeholder="name@gla.ac.in" required>
+          <div class="invalid-feedback d-block small" id="emailErr"></div>
+        </div>
+
+        <div class="mb-3">
+          <label for="course" class="form-label fw-semibold small">Course</label>
+          <select class="form-select" id="course">
+            <option>B.Tech CSE</option>
+            <option>B.Tech IT</option>
+            <option>B.Tech ME</option>
+            <option>BCA</option>
+            <option>MCA</option>
+          </select>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-sm-6 mb-3">
+            <label for="password" class="form-label fw-semibold small">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Min 6 characters" required>
+            <div class="invalid-feedback d-block small" id="passwordErr"></div>
+          </div>
+          <div class="col-sm-6 mb-3">
+            <label for="confirm" class="form-label fw-semibold small">Confirm password</label>
+            <input type="password" class="form-control" id="confirm" placeholder="Repeat password" required>
+            <div class="invalid-feedback d-block small" id="confirmErr"></div>
+          </div>
+        </div>
+
+        <div class="form-check mb-4">
+          <input class="form-check-input" type="checkbox" id="terms">
+          <label class="form-check-label small" for="terms">
+            I agree to the library rules on borrowing limits and fines.
+          </label>
+          <div class="invalid-feedback d-block small" id="termsErr"></div>
+        </div>
+
+        <button type="submit" class="btn btn-navy w-100 py-2">Create account</button>
+      </form>
+
+      <p class="text-center text-muted-soft small mt-4 mb-0">
+        Already a member? <a href="login.html" class="fw-semibold text-decoration-none">Log in instead</a>
+      </p>
+      <p class="text-center mt-3 mb-0">
+        <a href="index.html" class="small text-muted-soft text-decoration-none"><i class="bi bi-arrow-left"></i> Back to home</a>
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>
