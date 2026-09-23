@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Resources | GLA Central Library</title>
+<link rel="icon" href="img/logo.svg">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top site-nav">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+      <img src="img/logo.svg" alt="" width="38" height="38">
+      <span class="d-flex flex-column lh-1">
+        <span class="fw-bold">GLA Central Library</span>
+        <span class="brand-sub">Digital Resource Management</span>
+      </span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="catalogue.html" data-match="book-details.html">Catalogue</a></li>
+        <li class="nav-item"><a class="nav-link" href="digital-resources.html">Digital Resources</a></li>
+        <li class="nav-item"><a class="nav-link" href="member-dashboard.html">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="issue-return.html">Issue / Return</a></li>
+      </ul>
+      <div class="d-flex gap-2 ms-lg-3 mt-2 mt-lg-0" id="navAuth"></div>
+    </div>
+  </div>
+</nav>
+
+<section class="py-4 bg-white border-bottom">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb small mb-2">
+        <li class="breadcrumb-item"><a href="index.html" class="text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active">Digital Resources</li>
+      </ol>
+    </nav>
+    <h1 class="h3">Digital Resources</h1>
+    <p class="text-muted-soft" style="max-width:65ch">E-books, research papers and journal subscriptions you can open straight away. Open access material needs no checkout.</p>
+
+    <div class="input-group mt-3" style="max-width:640px">
+      <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+      <input type="text" class="form-control" id="resSearch" placeholder="Search e-books, papers and journals">
+    </div>
+
+    <div class="d-flex flex-wrap gap-2 mt-3" id="typeTabs"></div>
+  </div>
+</section>
+
+<section class="py-4 py-lg-5">
+  <div class="container">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+      <span class="text-muted-soft small" id="resCount">Loading resources...</span>
+      <select class="form-select w-auto" id="resSort">
+        <option value="popular">Sort by: Most Accessed</option>
+        <option value="newest">Sort by: Newest</option>
+        <option value="title">Sort by: Title (A-Z)</option>
+      </select>
+    </div>
+
+    <div class="row g-4" id="resourceGrid">
+      <div class="col-12 text-center py-5">
+        <div class="spinner-border text-secondary" role="status"><span class="visually-hidden">Loading</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer pt-5">
+  <div class="container">
+    <div class="row g-4 pb-4">
+      <div class="col-lg-4">
+        <h5>GLA Central Library</h5>
+        <p class="small mb-0">A unified portal for browsing, issuing and managing physical and digital resources at GLA University, Mathura.</p>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h5>Quick Links</h5>
+        <ul class="list-unstyled d-grid gap-2 mb-0">
+          <li><a href="catalogue.html">Catalogue</a></li>
+          <li><a href="digital-resources.html">Digital Resources</a></li>
+          <li><a href="issue-return.html">Issue / Return</a></li>
+          <li><a href="member-dashboard.html">Member Dashboard</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h5>Categories</h5>
+        <ul class="list-unstyled d-grid gap-2 mb-0">
+          <li><a href="catalogue.html?category=Computer+Science">Computer Science</a></li>
+          <li><a href="catalogue.html?category=Mathematics">Mathematics</a></li>
+          <li><a href="catalogue.html?category=Software+Engineering">Software Engineering</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <h5>Contact</h5>
+        <ul class="list-unstyled d-grid gap-2 mb-0 small">
+          <li><i class="bi bi-envelope me-2"></i>library@gla.ac.in</li>
+          <li><i class="bi bi-telephone me-2"></i>+91 565 350 3000</li>
+          <li><i class="bi bi-geo-alt me-2"></i>GLA University, Mathura, UP</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom py-3 d-flex flex-wrap justify-content-between gap-2">
+      <span>&copy; 2026 GLA Central Library. Mini Project, B.Tech CSE 3rd Year.</span>
+      <span>Built with HTML, CSS, Bootstrap and JavaScript</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/resources.js"></script>
+</body>
+</html>

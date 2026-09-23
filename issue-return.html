@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Issue / Return | GLA Central Library</title>
+<link rel="icon" href="img/logo.svg">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top site-nav">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+      <img src="img/logo.svg" alt="" width="38" height="38">
+      <span class="d-flex flex-column lh-1">
+        <span class="fw-bold">GLA Central Library</span>
+        <span class="brand-sub">Digital Resource Management</span>
+      </span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="catalogue.html" data-match="book-details.html">Catalogue</a></li>
+        <li class="nav-item"><a class="nav-link" href="digital-resources.html">Digital Resources</a></li>
+        <li class="nav-item"><a class="nav-link" href="member-dashboard.html">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="issue-return.html">Issue / Return</a></li>
+      </ul>
+      <div class="d-flex gap-2 ms-lg-3 mt-2 mt-lg-0" id="navAuth"></div>
+    </div>
+  </div>
+</nav>
+
+<section class="py-4 py-lg-5">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb small mb-2">
+        <li class="breadcrumb-item"><a href="index.html" class="text-decoration-none">Home</a></li>
+        <li class="breadcrumb-item active">Issue / Return</li>
+      </ol>
+    </nav>
+    <h1 class="h3">Issue and Return Books</h1>
+    <p class="text-muted-soft" style="max-width:65ch">Issue a new book or return one you are holding. Due dates and fines are worked out automatically from the loan rules.</p>
+
+    <div class="row text-center steps my-4 my-lg-5" id="stepBar">
+      <div class="col step is-done">
+        <div class="step-dot"><i class="bi bi-check-lg"></i></div>
+        <small>Select Member</small>
+      </div>
+      <div class="col step is-active">
+        <div class="step-dot">2</div>
+        <small>Choose Book</small>
+      </div>
+      <div class="col step">
+        <div class="step-dot">3</div>
+        <small>Confirm</small>
+      </div>
+      <div class="col step">
+        <div class="step-dot">4</div>
+        <small>Done</small>
+      </div>
+    </div>
+
+    <div class="row g-4">
+
+      <!-- issue panel -->
+      <div class="col-lg-6">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="h6 d-flex align-items-center gap-2 mb-3">
+              <img src="img/icons/issue-return.svg" alt="" width="22" height="22"> Issue a Book
+            </h2>
+
+            <form id="issueForm" novalidate>
+              <div class="mb-3">
+                <label for="issueMember" class="form-label small fw-semibold">Member</label>
+                <select class="form-select" id="issueMember"></select>
+              </div>
+
+              <div class="mb-3">
+                <label for="issueBook" class="form-label small fw-semibold">Book</label>
+                <select class="form-select" id="issueBook"></select>
+                <div class="invalid-feedback d-block small" id="issueBookErr"></div>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-sm-6 mb-3">
+                  <label for="issueDate" class="form-label small fw-semibold">Issue date</label>
+                  <input type="date" class="form-control" id="issueDate">
+                </div>
+                <div class="col-sm-6 mb-3">
+                  <label for="dueDate" class="form-label small fw-semibold">Due date</label>
+                  <input type="date" class="form-control" id="dueDate" readonly>
+                </div>
+              </div>
+
+              <div class="alert alert-info d-flex gap-2 align-items-start py-2 small" role="alert">
+                <i class="bi bi-info-circle-fill"></i>
+                <span id="issueNote">Standard loan period is 14 days for students.</span>
+              </div>
+
+              <div class="summary-box mb-3" id="issueSummary"></div>
+
+              <button type="submit" class="btn btn-gold w-100">Confirm and Issue</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- return panel -->
+      <div class="col-lg-6">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="h6 d-flex align-items-center gap-2 mb-3">
+              <i class="bi bi-arrow-return-left text-primary fs-5"></i> Return a Book
+            </h2>
+
+            <form id="returnForm" novalidate>
+              <div class="mb-3">
+                <label for="returnMember" class="form-label small fw-semibold">Member</label>
+                <select class="form-select" id="returnMember"></select>
+              </div>
+
+              <div class="mb-3">
+                <label for="returnBook" class="form-label small fw-semibold">Issued book</label>
+                <select class="form-select" id="returnBook"></select>
+                <div class="invalid-feedback d-block small" id="returnBookErr"></div>
+              </div>
+
+              <div class="mb-3">
+                <label for="returnDate" class="form-label small fw-semibold">Return date</label>
+                <input type="date" class="form-control" id="returnDate">
+              </div>
+
+              <div id="fineAlert"></div>
+
+              <div class="summary-box mb-3" id="returnSummary"></div>
+
+              <button type="submit" class="btn btn-navy w-100">Confirm and Return</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mt-4">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+          <h2 class="h6 mb-0">Recent Transactions</h2>
+          <button class="btn btn-outline-secondary btn-sm" id="resetDemo">Reset demo data</button>
+        </div>
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <thead>
+              <tr>
+                <th>Member</th>
+                <th>Book</th>
+                <th>Action</th>
+                <th>Date</th>
+                <th>Fine</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="txnRows"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer pt-5">
+  <div class="container">
+    <div class="row g-4 pb-4">
+      <div class="col-lg-4">
+        <h5>GLA Central Library</h5>
+        <p class="small mb-0">A unified portal for browsing, issuing and managing physical and digital resources at GLA University, Mathura.</p>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h5>Quick Links</h5>
+        <ul class="list-unstyled d-grid gap-2 mb-0">
+          <li><a href="catalogue.html">Catalogue</a></li>
+          <li><a href="digital-resources.html">Digital Resources</a></li>
+          <li><a href="issue-return.html">Issue / Return</a></li>
+          <li><a href="member-dashboard.html">Member Dashboard</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h5>Categories</h5>
+        <ul class="list-unstyled d-grid gap-2 mb-0">
+          <li><a href="catalogue.html?category=Computer+Science">Computer Science</a></li>
+          <li><a href="catalogue.html?category=Mathematics">Mathematics</a></li>
+          <li><a href="catalogue.html?category=Software+Engineering">Software Engineering</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3">
+        <h5>Contact</h5>
+        <ul class="list-unstyled d-grid gap-2 mb-0 small">
+          <li><i class="bi bi-envelope me-2"></i>library@gla.ac.in</li>
+          <li><i class="bi bi-telephone me-2"></i>+91 565 350 3000</li>
+          <li><i class="bi bi-geo-alt me-2"></i>GLA University, Mathura, UP</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom py-3 d-flex flex-wrap justify-content-between gap-2">
+      <span>&copy; 2026 GLA Central Library. Mini Project, B.Tech CSE 3rd Year.</span>
+      <span>Built with HTML, CSS, Bootstrap and JavaScript</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/issue-return.js"></script>
+</body>
+</html>
