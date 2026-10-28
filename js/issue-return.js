@@ -278,6 +278,12 @@ document.addEventListener("DOMContentLoaded", async function () {
   });
 
   el("resetDemo").addEventListener("click", function () {
+    const confirmReset = confirm("Are you sure you want to reset demo data?");
+
+    if (!confirmReset) {
+        return;
+    }
+
     localStorage.removeItem("gla_txn_changes");
     LIB.toast("Demo transactions reset.", "dark");
     setTimeout(() => location.reload(), 600);
