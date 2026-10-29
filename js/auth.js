@@ -1,11 +1,4 @@
-/* login + signup form handling
- *
- * NOTE: this is a front-end simulation for Phase 1. There is no server, so
- * credentials are compared against data/members.json in the browser and the
- * "session" is just a localStorage key. Anyone can read that file, so never put
- * a real password in it. Actual authentication (hashed passwords, server-side
- * sessions) is a backend phase job.
- */
+
 
 function setFieldError(id, message) {
   const box = document.getElementById(id + "Err");
@@ -24,7 +17,6 @@ function showAlert(slotId, message, variant) {
     '<span>' + LIB.escapeHtml(message) + "</span></div>";
 }
 
-/* ---------- login ---------- */
 
 const loginForm = document.getElementById("loginForm");
 
@@ -77,7 +69,6 @@ if (loginForm) {
   });
 }
 
-/* ---------- signup ---------- */
 
 const signupForm = document.getElementById("signupForm");
 
