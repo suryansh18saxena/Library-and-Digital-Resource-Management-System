@@ -59,7 +59,6 @@
   <div class="container">
     <div class="row g-4">
 
-      <!-- sidebar filters -->
       <div class="col-lg-3">
         <div class="card filter-card">
           <div class="card-body">
@@ -82,7 +81,7 @@
 
       <div class="col-lg-9">
         <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
-          <span class="text-muted-soft small" id="resultCount">Loading books...</span>
+          <span class="text-muted-soft small" id="resultCount"></span>
           <select class="form-select w-auto" id="sortSelect">
             <option value="relevance">Sort by: Relevance</option>
             <option value="title">Sort by: Title (A-Z)</option>
@@ -92,9 +91,6 @@
         </div>
 
         <div class="row g-4" id="bookGrid">
-          <div class="col-12 text-center py-5">
-            <div class="spinner-border text-secondary" role="status"><span class="visually-hidden">Loading</span></div>
-          </div>
         </div>
 
         <nav class="mt-4 d-flex justify-content-center">
@@ -146,7 +142,5 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/main.js"></script>
-<script src="js/catalogue.js"></script>
 </body>
 </html>

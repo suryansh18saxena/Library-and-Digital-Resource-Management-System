@@ -1,5 +1,3 @@
-/* custom layer on top of bootstrap 5 - Suryansh */
-
 :root {
   --navy: #1b3a5c;
   --navy-dark: #12283f;
@@ -10,7 +8,6 @@
   --line: #e3e7ee;
   --muted: #626b79;
 
-  /* bootstrap overrides */
   --bs-primary: #1b3a5c;
   --bs-primary-rgb: 27, 58, 92;
   --bs-body-bg: #f4f6f9;
@@ -37,8 +34,6 @@ h1, h2, h3, h4, h5 {
 }
 
 .text-muted-soft { color: var(--muted) !important; }
-
-/* buttons */
 
 .btn {
   font-weight: 600;
@@ -83,8 +78,6 @@ h1, h2, h3, h4, h5 {
   color: #fff;
 }
 
-/* navbar */
-
 .site-nav {
   background: var(--navy-dark);
   box-shadow: 0 2px 12px rgba(0, 0, 0, .16);
@@ -115,8 +108,6 @@ h1, h2, h3, h4, h5 {
   color: #2a1c02;
   background: var(--gold);
 }
-
-/* hero */
 
 .hero {
   background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
@@ -170,8 +161,6 @@ h1, h2, h3, h4, h5 {
 
 .stat-tile small { color: #c3cede; font-size: .78rem; }
 
-/* cards */
-
 .card {
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -187,7 +176,7 @@ h1, h2, h3, h4, h5 {
   overflow: hidden;
   border-radius: 12px 12px 0 0;
   background: var(--navy-dark);
-  aspect-ratio: 5 / 7; /* same ratio as the cover svgs, otherwise the bottom label gets cropped */
+  aspect-ratio: 5 / 7;
 }
 
 .book-card .cover-wrap img {
@@ -215,8 +204,6 @@ h1, h2, h3, h4, h5 {
 
 .rating { color: var(--gold-dark); font-weight: 700; font-size: .85rem; }
 
-/* feature blocks */
-
 .feature-icon-box {
   width: 56px;
   height: 56px;
@@ -235,8 +222,6 @@ h1, h2, h3, h4, h5 {
 
 .feature-icon-box img { width: 32px; height: 32px; }
 
-/* badges */
-
 .badge-available { background: #e6f4ea; color: #216e44; }
 .badge-issued    { background: #fbe9e7; color: #b0332a; }
 .badge-reserved  { background: #fff6e0; color: #8a6100; }
@@ -250,8 +235,6 @@ h1, h2, h3, h4, h5 {
   padding: .32em .7em;
   border-radius: 20px;
 }
-
-/* resource cards */
 
 .resource-head {
   height: 118px;
@@ -280,8 +263,6 @@ h1, h2, h3, h4, h5 {
   color: #55606f;
 }
 
-/* filters + tables */
-
 .filter-card { position: sticky; top: 88px; }
 
 .form-check-label { font-size: .92rem; }
@@ -305,8 +286,6 @@ h1, h2, h3, h4, h5 {
   border-radius: 4px;
   flex-shrink: 0;
 }
-
-/* dashboard */
 
 .stat-box {
   border: 1px solid var(--line);
@@ -339,8 +318,6 @@ h1, h2, h3, h4, h5 {
 .profile-detail li:last-child { border-bottom: 0; }
 
 .profile-detail li span:first-child { color: var(--muted); }
-
-/* issue / return steps */
 
 .steps { position: relative; }
 
@@ -399,8 +376,6 @@ h1, h2, h3, h4, h5 {
   font-weight: 700;
 }
 
-/* auth pages */
-
 .auth-wrap {
   min-height: 100vh;
   display: grid;
@@ -442,8 +417,6 @@ h1, h2, h3, h4, h5 {
   .filter-card, .profile-card { position: static; }
 }
 
-/* footer */
-
 .site-footer {
   background: var(--navy-dark);
   color: #b6c2d2;
@@ -466,18 +439,6 @@ h1, h2, h3, h4, h5 {
   font-size: .8rem;
   color: #8896a9;
 }
-
-/* scroll reveal */
-
-.reveal {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity .5s ease, transform .5s ease;
-}
-
-.reveal.is-visible { opacity: 1; transform: none; }
-
-/* small stuff */
 
 .empty-state {
   border: 1px dashed var(--line);
@@ -503,7 +464,6 @@ h1, h2, h3, h4, h5 {
   box-shadow: 0 0 0 .2rem rgba(44, 84, 130, .15);
 }
 
-/* people who prefer less motion get none of it */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -512,5 +472,4 @@ h1, h2, h3, h4, h5 {
     animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
   }
-  .reveal { opacity: 1; transform: none; }
 }
