@@ -190,3 +190,25 @@ document.addEventListener("DOMContentLoaded", async function () {
     render();
   });
 });
+
+// Hover effect for the entire filter section
+document.addEventListener("DOMContentLoaded", function () {
+  const filterSection = document.querySelector(".filters-section");
+
+  if (filterSection) {
+    filterSection.style.transition =
+      "box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease";
+
+    filterSection.addEventListener("mouseenter", function () {
+      filterSection.style.boxShadow = "0 8px 24px rgba(0, 0, 0, 0.08)";
+      filterSection.style.borderColor = "#cbd5e1";
+      filterSection.style.transform = "translateY(-2px)";
+    });
+
+    filterSection.addEventListener("mouseleave", function () {
+      filterSection.style.boxShadow = "";
+      filterSection.style.borderColor = "";
+      filterSection.style.transform = "";
+    });
+  }
+});
