@@ -3,70 +3,99 @@
     "memberId": "2415001642",
     "name": "Suryansh Saxena",
     "email": "suryansh@gla.ac.in",
-    "password": "library@642",
+    "passwordHash": "e6b5c50a7bdbbe83f03548b8ab7c7adedb82ba6a6e1caeb4ac64e1375d7e56b1",
+    "role": "student",
     "course": "B.Tech CSE",
     "year": "3rd Year",
-    "membership": "Student",
     "joined": "2024-08-01",
     "bookLimit": 5,
     "initials": "SS",
     "status": "active",
-    "savedResources": ["DR001", "DR002", "DR004"]
+    "savedResources": [
+      "DR001",
+      "DR002",
+      "DR004"
+    ]
   },
   {
     "memberId": "2415001659",
     "name": "Tanishq Rastogi",
     "email": "tanishq@gla.ac.in",
-    "password": "library@659",
+    "passwordHash": "f86d8152a51c7c6fded8ebe0f7297f87cfb9f306359a687f51c86b6918a3e77c",
+    "role": "student",
     "course": "B.Tech CSE",
     "year": "3rd Year",
-    "membership": "Student",
     "joined": "2024-08-01",
     "bookLimit": 5,
     "initials": "TR",
     "status": "active",
-    "savedResources": ["DR008", "DR012"]
+    "savedResources": [
+      "DR008",
+      "DR012"
+    ]
   },
   {
     "memberId": "2415001654",
     "name": "Tanishka Chaudhary",
     "email": "tanishka@gla.ac.in",
-    "password": "library@654",
+    "passwordHash": "18a9afcfce3ec0a7a79276502644d3bd4972bfe2c72d52106a1a64e041557913",
+    "role": "student",
     "course": "B.Tech CSE",
     "year": "3rd Year",
-    "membership": "Student",
     "joined": "2024-08-01",
     "bookLimit": 5,
     "initials": "TC",
     "status": "active",
-    "savedResources": ["DR002", "DR007"]
+    "savedResources": [
+      "DR002",
+      "DR007"
+    ]
   },
   {
     "memberId": "2415001590",
     "name": "Sonu Raj",
     "email": "sonu@gla.ac.in",
-    "password": "library@590",
+    "passwordHash": "9e7034f36a6af176a5b0d55a91cc2316c6c4576969bb0e87eafd47af3d3cef9b",
+    "role": "student",
     "course": "B.Tech CSE",
     "year": "3rd Year",
-    "membership": "Student",
     "joined": "2024-08-01",
     "bookLimit": 5,
     "initials": "SR",
     "status": "active",
-    "savedResources": ["DR005"]
+    "savedResources": [
+      "DR005"
+    ]
   },
   {
     "memberId": "FAC000118",
     "name": "Dr. R. K. Agarwal",
     "email": "rk.agarwal@gla.ac.in",
-    "password": "faculty@118",
+    "passwordHash": "c103aff3ce8ea289b9aa5d66b565b50a80f8cd3624707ecfbf059e8e6d8ebe6b",
+    "role": "faculty",
     "course": "Department of CEA",
     "year": "Faculty",
-    "membership": "Faculty",
     "joined": "2019-07-15",
     "bookLimit": 10,
     "initials": "RA",
     "status": "active",
-    "savedResources": ["DR003", "DR006"]
+    "savedResources": [
+      "DR003",
+      "DR006"
+    ]
+  },
+  {
+    "memberId": "LIB0001",
+    "name": "Head Librarian",
+    "email": "librarian@gla.ac.in",
+    "passwordHash": "68d8d6abaf35f309ca711680ac4b11b99ca725cb919cc1a1de1bb15dcbcb2e47",
+    "role": "librarian",
+    "course": "Central Library",
+    "year": "Staff",
+    "joined": "2018-06-01",
+    "bookLimit": 0,
+    "initials": "HL",
+    "status": "active",
+    "savedResources": []
   }
 ]
