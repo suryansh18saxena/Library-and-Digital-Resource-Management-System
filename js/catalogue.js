@@ -1,214 +1,207 @@
-/* catalogue page - client side search, filter, sort and pagination over books.json */
+/* Catalogue page (catalogue.html)
+ * Owner: Suryansh Saxena
+ * Search + category / availability / language filters + sort + pagination.
+ * The search and filters are kept in the URL, so a filtered list can be
+ * bookmarked or shared (e.g. catalogue.html?category=Mathematics).
+ */
 
-const PER_PAGE = 6;
+LIB.page({}, function (ctx) {
+  const books = ctx.db.all("books");
+  const $ = LIB.$;
+  const PAGE_SIZE = 8;
 
-let allBooks = [];
-let currentPage = 1;
+  const state = {
+    q: LIB.param("q") || "",
+    categories: LIB.param("category") ? [LIB.param("category")] : [],
+    availability: "all",
+    languages: [],
+    sort: LIB.param("sort") || "relevance",
+    page: 1,
+  };
 
-const grid = document.getElementById("bookGrid");
-const countLabel = document.getElementById("resultCount");
-const searchInput = document.getElementById("searchInput");
-const sortSelect = document.getElementById("sortSelect");
+  /* --------- build the filter checkboxes from the data --------- */
 
-function checkboxRow(group, value, label, count, checked) {
-  const id = group + "-" + value.replace(/[^a-z0-9]/gi, "");
-  return (
-    '<div class="form-check">' +
-    '<input class="form-check-input filter-input" type="checkbox" value="' +
-    LIB.escapeHtml(value) + '" id="' + id + '" data-group="' + group + '"' + (checked ? " checked" : "") + ">" +
-    '<label class="form-check-label" for="' + id + '">' + LIB.escapeHtml(label) +
-    (count !== null ? ' <span class="text-muted-soft">(' + count + ")</span>" : "") +
-    "</label></div>"
-  );
-}
+  function countBy(field) {
+    const counts = {};
+    books.forEach((b) => (counts[b[field]] = (counts[b[field]] || 0) + 1));
+    return counts;
+  }
 
-function buildFilters() {
-  const byCategory = {};
-  const byLanguage = {};
-  allBooks.forEach((b) => {
-    byCategory[b.category] = (byCategory[b.category] || 0) + 1;
-    byLanguage[b.language] = (byLanguage[b.language] || 0) + 1;
-  });
+  function checkboxList(container, name, counts, selected) {
+    container.innerHTML = Object.keys(counts)
+      .sort()
+      .map(function (value, i) {
+        const id = name + i;
+        return (
+          '<div class="form-check d-flex justify-content-between">' +
+          '<span><input class="form-check-input me-2" type="checkbox" name="' + name + '" id="' + id + '" value="' + LIB.esc(value) + '"' +
+          (selected.includes(value) ? " checked" : "") + ">" +
+          '<label class="form-check-label" for="' + id + '">' + LIB.esc(value) + "</label></span>" +
+          '<span class="text-muted-soft small">' + counts[value] + "</span></div>"
+        );
+      })
+      .join("");
+  }
 
-  const preselect = LIB.param("category");
+  function renderFilters() {
+    checkboxList($("categoryFilters"), "category", countBy("category"), state.categories);
+    checkboxList($("languageFilters"), "language", countBy("language"), state.languages);
 
-  document.getElementById("categoryFilters").innerHTML = Object.keys(byCategory)
-    .sort()
-    .map((c) => checkboxRow("category", c, c, byCategory[c], preselect === c))
-    .join("");
+    const options = [
+      ["all", "All books"],
+      ["available", "Available now"],
+      ["issued", "All copies issued"],
+    ];
+    $("statusFilters").innerHTML = options
+      .map(function (o) {
+        return (
+          '<div class="form-check"><input class="form-check-input" type="radio" name="availability" id="av-' + o[0] + '" value="' + o[0] + '"' +
+          (state.availability === o[0] ? " checked" : "") + '><label class="form-check-label" for="av-' + o[0] + '">' + o[1] + "</label></div>"
+        );
+      })
+      .join("");
+  }
 
-  const statuses = [
-    ["available", "Available Now"],
-    ["issued", "Currently Issued"],
-    ["reserved", "Reserved"],
-  ];
-  document.getElementById("statusFilters").innerHTML = statuses
-    .map((s) => checkboxRow("status", s[0], s[1], allBooks.filter((b) => b.status === s[0]).length, false))
-    .join("");
+  /* --------- filtering, sorting, paging --------- */
 
-  document.getElementById("languageFilters").innerHTML = Object.keys(byLanguage)
-    .sort()
-    .map((l) => checkboxRow("language", l, l, byLanguage[l], false))
-    .join("");
+  function matches(book, term) {
+    if (!term) return true;
+    const haystack = [book.title, book.author, book.isbn, book.subject, book.publisher].concat(book.tags || []).join(" ").toLowerCase();
+    return term.split(/\s+/).every((word) => haystack.includes(word));
+  }
 
-  document.querySelectorAll(".filter-input").forEach((input) => {
-    input.addEventListener("change", function () {
-      currentPage = 1;
-      render();
+  // relevance: title hits score higher than author or tag hits
+  function score(book, term) {
+    if (!term) return 0;
+    const title = book.title.toLowerCase();
+    return (title.startsWith(term) ? 3 : 0) + (title.includes(term) ? 2 : 0) + (book.author.toLowerCase().includes(term) ? 1 : 0);
+  }
+
+  function results() {
+    const term = state.q.trim().toLowerCase();
+    const found = books.filter(function (b) {
+      if (!matches(b, term)) return false;
+      if (state.categories.length && !state.categories.includes(b.category)) return false;
+      if (state.languages.length && !state.languages.includes(b.language)) return false;
+      if (state.availability === "available" && b.copiesAvailable < 1) return false;
+      if (state.availability === "issued" && b.copiesAvailable > 0) return false;
+      return true;
     });
-  });
-}
 
-function selectedValues(group) {
-  return Array.from(document.querySelectorAll('.filter-input[data-group="' + group + '"]:checked')).map(
-    (el) => el.value
-  );
-}
+    const sorters = {
+      relevance: (a, b) => score(b, term) - score(a, term) || b.rating - a.rating,
+      title: (a, b) => a.title.localeCompare(b.title),
+      newest: (a, b) => b.addedOn.localeCompare(a.addedOn),
+      rating: (a, b) => b.rating - a.rating,
+      available: (a, b) => b.copiesAvailable - a.copiesAvailable,
+    };
+    return found.sort(sorters[state.sort] || sorters.relevance);
+  }
 
-function applyFilters() {
-  const term = searchInput.value.trim().toLowerCase();
-  const categories = selectedValues("category");
-  const statuses = selectedValues("status");
-  const languages = selectedValues("language");
-
-  let list = allBooks.filter((book) => {
-    if (categories.length && !categories.includes(book.category)) return false;
-    if (statuses.length && !statuses.includes(book.status)) return false;
-    if (languages.length && !languages.includes(book.language)) return false;
-    if (term) {
-      const haystack = (book.title + " " + book.author + " " + book.isbn + " " + book.subject).toLowerCase();
-      if (!haystack.includes(term)) return false;
+  function renderPagination(totalPages) {
+    if (totalPages <= 1) {
+      $("pagination").innerHTML = "";
+      return;
     }
-    return true;
-  });
-
-  const sort = sortSelect.value;
-  if (sort === "title") list.sort((a, b) => a.title.localeCompare(b.title));
-  else if (sort === "newest") list.sort((a, b) => b.addedOn.localeCompare(a.addedOn));
-  else if (sort === "rating") list.sort((a, b) => b.rating - a.rating);
-
-  return list;
-}
-
-function renderPagination(totalPages) {
-  const holder = document.getElementById("pagination");
-  if (totalPages <= 1) {
-    holder.innerHTML = "";
-    return;
-  }
-
-  let html =
-    '<li class="page-item' + (currentPage === 1 ? " disabled" : "") + '">' +
-    '<button class="page-link" data-page="' + (currentPage - 1) + '">Prev</button></li>';
-
-  for (let i = 1; i <= totalPages; i++) {
+    let html =
+      '<li class="page-item' + (state.page === 1 ? " disabled" : "") + '"><button class="page-link" data-page="' + (state.page - 1) + '" aria-label="Previous">&laquo;</button></li>';
+    for (let p = 1; p <= totalPages; p++) {
+      html +=
+        '<li class="page-item' + (p === state.page ? " active" : "") + '"><button class="page-link" data-page="' + p + '"' +
+        (p === state.page ? ' aria-current="page"' : "") + ">" + p + "</button></li>";
+    }
     html +=
-      '<li class="page-item' + (i === currentPage ? " active" : "") + '">' +
-      '<button class="page-link" data-page="' + i + '">' + i + "</button></li>";
+      '<li class="page-item' + (state.page === totalPages ? " disabled" : "") + '"><button class="page-link" data-page="' + (state.page + 1) + '" aria-label="Next">&raquo;</button></li>';
+    $("pagination").innerHTML = html;
   }
 
-  html +=
-    '<li class="page-item' + (currentPage === totalPages ? " disabled" : "") + '">' +
-    '<button class="page-link" data-page="' + (currentPage + 1) + '">Next</button></li>';
-
-  holder.innerHTML = html;
-  holder.querySelectorAll("button[data-page]").forEach((btn) => {
-    btn.addEventListener("click", function () {
-      const page = parseInt(btn.dataset.page, 10);
-      if (page < 1 || page > totalPages) return;
-      currentPage = page;
-      render();
-      window.scrollTo({ top: 220, behavior: "smooth" });
-    });
-  });
-}
-
-function render() {
-  const list = applyFilters();
-  const totalPages = Math.ceil(list.length / PER_PAGE) || 1;
-  if (currentPage > totalPages) currentPage = totalPages;
-
-  const start = (currentPage - 1) * PER_PAGE;
-  const page = list.slice(start, start + PER_PAGE);
-
-  if (!list.length) {
-    grid.innerHTML =
-      '<div class="col-12"><div class="empty-state">' +
-      '<i class="bi bi-search fs-2 d-block mb-2 opacity-50"></i>' +
-      "<strong>No books matched your search.</strong><br>Try clearing a filter or searching for something else." +
-      "</div></div>";
-    countLabel.textContent = "No books found";
-    renderPagination(1);
-    return;
+  function syncUrl() {
+    const params = new URLSearchParams();
+    if (state.q) params.set("q", state.q);
+    if (state.categories.length === 1) params.set("category", state.categories[0]);
+    if (state.sort !== "relevance") params.set("sort", state.sort);
+    const qs = params.toString();
+    history.replaceState(null, "", "catalogue.html" + (qs ? "?" + qs : ""));
   }
 
-  grid.innerHTML = page.map((b) => LIB.bookCard(b, "col-sm-6 col-xl-4")).join("");
-  countLabel.innerHTML =
-    "Showing <strong>" + (start + 1) + "-" + (start + page.length) + "</strong> of <strong>" + list.length + "</strong> books";
+  function render() {
+    const list = results();
+    const totalPages = Math.max(1, Math.ceil(list.length / PAGE_SIZE));
+    state.page = Math.min(state.page, totalPages);
+    const start = (state.page - 1) * PAGE_SIZE;
+    const pageItems = list.slice(start, start + PAGE_SIZE);
 
-  renderPagination(totalPages);
-  LIB.initReveal();
-}
+    $("resultCount").textContent = list.length
+      ? "Showing " + (start + 1) + "-" + (start + pageItems.length) + " of " + list.length + " books"
+      : "0 books found";
 
-document.addEventListener("DOMContentLoaded", async function () {
-  try {
-    allBooks = await LIB.load("books");
-  } catch (err) {
-    LIB.showLoadError(grid, err);
-    countLabel.textContent = "";
-    return;
+    $("bookGrid").innerHTML = pageItems.length
+      ? pageItems.map((b) => LIB.bookCard(b, "col-sm-6 col-xl-3")).join("")
+      : '<div class="col-12">' + LIB.emptyState("No books matched your search. Try fewer words or reset the filters.", "search") + "</div>";
+
+    renderPagination(totalPages);
+    syncUrl();
   }
 
-  // the home page quick search sends people here with ?q= and ?category=
-  const q = LIB.param("q");
-  if (q) searchInput.value = q;
+  /* --------- events --------- */
 
-  buildFilters();
-  render();
-
-  let debounce;
-  searchInput.addEventListener("input", function () {
-    clearTimeout(debounce);
-    debounce = setTimeout(function () {
-      currentPage = 1;
+  let timer = null;
+  $("searchInput").value = state.q;
+  $("searchInput").addEventListener("input", function () {
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      state.q = $("searchInput").value;
+      state.page = 1;
       render();
     }, 200);
   });
-
-  document.getElementById("searchBtn").addEventListener("click", function () {
-    currentPage = 1;
+  $("searchForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    state.q = $("searchInput").value;
+    state.page = 1;
     render();
   });
 
-  sortSelect.addEventListener("change", render);
-
-  document.getElementById("resetBtn").addEventListener("click", function () {
-    document.querySelectorAll(".filter-input").forEach((el) => (el.checked = false));
-    searchInput.value = "";
-    sortSelect.value = "relevance";
-    currentPage = 1;
+  $("sortSelect").value = state.sort;
+  $("sortSelect").addEventListener("change", function () {
+    state.sort = this.value;
+    state.page = 1;
     render();
   });
-});
 
-// Hover effect for the entire filter section
-document.addEventListener("DOMContentLoaded", function () {
-  const filterSection = document.querySelector(".filters-section");
+  document.querySelector(".filter-card").addEventListener("change", function (e) {
+    const t = e.target;
+    if (t.name === "category" || t.name === "language") {
+      const key = t.name === "category" ? "categories" : "languages";
+      state[key] = [...document.querySelectorAll('input[name="' + t.name + '"]:checked')].map((i) => i.value);
+    } else if (t.name === "availability") {
+      state.availability = t.value;
+    }
+    state.page = 1;
+    render();
+  });
 
-  if (filterSection) {
-    filterSection.style.transition =
-      "box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease";
+  $("resetBtn").addEventListener("click", function () {
+    state.q = "";
+    state.categories = [];
+    state.languages = [];
+    state.availability = "all";
+    state.sort = "relevance";
+    state.page = 1;
+    $("searchInput").value = "";
+    $("sortSelect").value = "relevance";
+    renderFilters();
+    render();
+  });
 
-    filterSection.addEventListener("mouseenter", function () {
-      filterSection.style.boxShadow = "0 8px 24px rgba(0, 0, 0, 0.08)";
-      filterSection.style.borderColor = "#cbd5e1";
-      filterSection.style.transform = "translateY(-2px)";
-    });
+  $("pagination").addEventListener("click", function (e) {
+    const btn = e.target.closest("[data-page]");
+    if (!btn || btn.parentElement.classList.contains("disabled")) return;
+    state.page = Number(btn.dataset.page);
+    render();
+    $("bookGrid").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 
-    filterSection.addEventListener("mouseleave", function () {
-      filterSection.style.boxShadow = "";
-      filterSection.style.borderColor = "";
-      filterSection.style.transform = "";
-    });
-  }
+  renderFilters();
+  render();
 });

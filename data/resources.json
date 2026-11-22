@@ -10,7 +10,8 @@
     "size": "2.1 MB",
     "addedOn": "2026-09-12",
     "views": 1284,
-    "description": "The paper that introduced the Transformer architecture."
+    "description": "The paper that introduced the Transformer architecture.",
+    "url": "https://arxiv.org/abs/1706.03762"
   },
   {
     "id": "DR002",
@@ -23,7 +24,8 @@
     "size": "8.4 MB",
     "addedOn": "2026-08-19",
     "views": 962,
-    "description": "Digital copy of the classic patterns catalogue."
+    "description": "Digital copy of the classic patterns catalogue.",
+    "url": "https://scholar.google.com/scholar?q=Design+Patterns+Elements+of+Reusable+Object-Oriented+Software"
   },
   {
     "id": "DR003",
@@ -36,7 +38,8 @@
     "size": "14.2 MB",
     "addedOn": "2026-09-01",
     "views": 431,
-    "description": "Peer reviewed networking research, institute subscription."
+    "description": "Peer reviewed networking research, institute subscription.",
+    "url": "https://ieeexplore.ieee.org/"
   },
   {
     "id": "DR004",
@@ -49,7 +52,8 @@
     "size": "22.6 MB",
     "addedOn": "2026-09-08",
     "views": 1105,
-    "description": "Full text of the MIT Press deep learning textbook."
+    "description": "Full text of the MIT Press deep learning textbook.",
+    "url": "https://www.deeplearningbook.org/"
   },
   {
     "id": "DR005",
@@ -62,7 +66,8 @@
     "size": "1.3 MB",
     "addedOn": "2026-07-22",
     "views": 318,
-    "description": "Survey of web based library management implementations."
+    "description": "Survey of web based library management implementations.",
+    "url": "https://scholar.google.com/scholar?q=web+based+library+management+system"
   },
   {
     "id": "DR006",
@@ -75,7 +80,8 @@
     "size": "18.9 MB",
     "addedOn": "2026-08-30",
     "views": 507,
-    "description": "Survey articles across all areas of computing."
+    "description": "Survey articles across all areas of computing.",
+    "url": "https://dl.acm.org/journal/csur"
   },
   {
     "id": "DR007",
@@ -88,7 +94,8 @@
     "size": "6.7 MB",
     "addedOn": "2026-09-21",
     "views": 288,
-    "description": "Hooks-first React guide, useful for the next phase of this project."
+    "description": "Hooks-first React guide, useful for the next phase of this project.",
+    "url": "https://www.oreilly.com/search/?q=learning%20react"
   },
   {
     "id": "DR008",
@@ -101,7 +108,8 @@
     "size": "1.9 MB",
     "addedOn": "2026-06-28",
     "views": 744,
-    "description": "The AlexNet paper that kicked off modern deep learning in vision."
+    "description": "The AlexNet paper that kicked off modern deep learning in vision.",
+    "url": "https://scholar.google.com/scholar?q=ImageNet+Classification+with+Deep+Convolutional+Neural+Networks"
   },
   {
     "id": "DR009",
@@ -114,7 +122,8 @@
     "size": "Online",
     "addedOn": "2026-09-19",
     "views": 156,
-    "description": "Reference used while building the JSON data layer for this project."
+    "description": "Reference used while building the JSON data layer for this project.",
+    "url": "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/JSON"
   },
   {
     "id": "DR010",
@@ -127,7 +136,8 @@
     "size": "Online",
     "addedOn": "2026-09-22",
     "views": 203,
-    "description": "Component and utility reference for the front-end framework used here."
+    "description": "Component and utility reference for the front-end framework used here.",
+    "url": "https://getbootstrap.com/docs/5.3/getting-started/introduction/"
   },
   {
     "id": "DR011",
@@ -140,7 +150,8 @@
     "size": "31.2 MB",
     "addedOn": "2026-08-12",
     "views": 1876,
-    "description": "Digital edition, available to enrolled students only."
+    "description": "Digital edition, available to enrolled students only.",
+    "url": "https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/"
   },
   {
     "id": "DR012",
@@ -153,6 +164,7 @@
     "size": "1.1 MB",
     "addedOn": "2026-05-14",
     "views": 392,
-    "description": "Foundational distributed systems paper from Google."
+    "description": "Foundational distributed systems paper from Google.",
+    "url": "https://research.google/pubs/mapreduce-simplified-data-processing-on-large-clusters/"
   }
 ]
