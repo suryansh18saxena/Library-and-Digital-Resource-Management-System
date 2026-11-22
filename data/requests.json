@@ -1,0 +1,32 @@
+[
+  {
+    "id": "REQ1001",
+    "memberId": "2415001659",
+    "bookId": "BK001",
+    "requestedOn": "2026-11-21",
+    "status": "pending",
+    "note": "Needed for DAA lab",
+    "decidedOn": null,
+    "txnId": null
+  },
+  {
+    "id": "REQ1002",
+    "memberId": "2415001590",
+    "bookId": "BK003",
+    "requestedOn": "2026-11-20",
+    "status": "pending",
+    "note": "",
+    "decidedOn": null,
+    "txnId": null
+  },
+  {
+    "id": "REQ0998",
+    "memberId": "2415001654",
+    "bookId": "BK006",
+    "requestedOn": "2026-11-04",
+    "status": "approved",
+    "note": "",
+    "decidedOn": "2026-11-05",
+    "txnId": "TXN1044"
+  }
+]
